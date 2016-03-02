@@ -10,31 +10,34 @@ clc
 
 load('mat/primeList_bigd.mat');
 
-
-divisor = 4
-modulus_bigd = primeList_bigd(1:divisor);
-
-dim = 32
+dim = 512
 height = dim;
 width  = dim;
 inputImage_uint = uint64(randi([0,255], height, width));
 
-tic
-reconData_bigd = javaCRTReconstruct(inputImage_uint, modulus_bigd);
-toc
-
-tic
-invReconData_uint = javaCRTInvReconstruct(reconData_bigd, modulus_bigd, height, width);
-toc
-
-aa = double(inputImage_uint);
-bb = double(invReconData_uint);
-
-nnz(aa-bb)
-
-% figure
-% spy(aa-bb)
+maxDivisor = 128;
+elapsedTime = zeros(maxDivisor/4, 2);
+for divisor = 4:4:maxDivisor
+	modulus_bigd = primeList_bigd(1:divisor);
 
 
+	tic
+	reconData_bigd = javaCRTReconstruct(inputImage_uint, modulus_bigd);
+	elapsedTime(divisor/4, 1) = toc;
 
+	tic
+	invReconData_uint = javaCRTInvReconstruct(reconData_bigd, modulus_bigd, height, width);
+	elapsedTime(divisor/4, 2) = toc;
 
+	aa = double(inputImage_uint);
+	bb = double(invReconData_uint);
+
+	if nnz(aa-bb) ~= 0
+		disp(['Wrong! ' num2str(divisor)]);
+	end
+	% figure
+	% spy(aa-bb)
+
+end
+
+elapsedTime
