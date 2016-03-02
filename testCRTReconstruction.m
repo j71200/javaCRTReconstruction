@@ -18,8 +18,8 @@ inputImage_uint = uint64(randi([0,255], height, width));
 maxDivisor = 128;
 elapsedTime = zeros(maxDivisor/4, 2);
 % for divisor = 4:4:maxDivisor
-for divisor = 112:4:maxDivisor
-	divisor
+% for divisor = 112:4:maxDivisor
+	divisor = 108
 
 	modulus_bigd = primeList_bigd(1:divisor);
 
@@ -41,6 +41,6 @@ for divisor = 112:4:maxDivisor
 	% figure
 	% spy(aa-bb)
 
-end
+% end
 
 elapsedTime
