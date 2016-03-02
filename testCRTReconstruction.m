@@ -41,6 +41,6 @@ for divisor = minDivisor:4:maxDivisor
 	% figure
 	% spy(aa-bb)
 
-% end
+end
 
 elapsedTime
