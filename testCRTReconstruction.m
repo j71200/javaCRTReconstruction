@@ -9,11 +9,12 @@ clc
 % modulus_bigd = [m1, m2, m3, m4];
 
 load('mat/primeList_bigd.mat');
-modulus_bigd = primeList_bigd(1:16);
 
 
+divisor = 4
+modulus_bigd = primeList_bigd(1:divisor);
 
-dim = 64
+dim = 32
 height = dim;
 width  = dim;
 inputImage_uint = uint64(randi([0,255], height, width));
