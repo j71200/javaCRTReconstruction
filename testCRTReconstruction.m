@@ -17,9 +17,10 @@ inputImage_uint = uint64(randi([0,255], height, width));
 
 maxDivisor = 128;
 elapsedTime = zeros(maxDivisor/4, 2);
-for divisor = 4:4:maxDivisor
+% for divisor = 4:4:maxDivisor
+for divisor = 108:4:maxDivisor
 	divisor
-	
+
 	modulus_bigd = primeList_bigd(1:divisor);
 
 
