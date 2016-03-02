@@ -15,11 +15,11 @@ height = dim;
 width  = dim;
 inputImage_uint = uint64(randi([0,255], height, width));
 
-maxDivisor = 128;
-elapsedTime = zeros(maxDivisor/4, 2);
-% for divisor = 4:4:maxDivisor
-% for divisor = 112:4:maxDivisor
-	divisor = 108
+minDivisor = 132;
+maxDivisor = 212;
+elapsedTime = zeros((maxDivisor-minDivisor)/4+1, 2);
+for divisor = minDivisor:4:maxDivisor
+	divisor
 
 	modulus_bigd = primeList_bigd(1:divisor);
 
