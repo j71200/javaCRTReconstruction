@@ -7,13 +7,13 @@ primeList = [257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 33
 ZERO_BIGD = java.math.BigDecimal('0');
 
 primeList_bigd = java.math.BigDecimal('257');
-for idx = 2:211
+for idx = 2:255
 	prime = primeList(idx);
 	prime_bigd = java.math.BigDecimal(num2str(prime));
 	primeList_bigd = [primeList_bigd, prime_bigd];
 end
 
-for idx = 1:211
+for idx = 1:255
 	disp(primeList_bigd(idx))
 end
 
