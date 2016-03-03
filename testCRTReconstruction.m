@@ -16,7 +16,7 @@ load('mat/primeList_255_bigd.mat');
 % inputImage_uint = uint64(randi([0,255], height, width));
 
 inputImage_uint = uint64(imread('images/airplane_gray.png'));
-
+[height, width] = size(inputImage_uint);
 
 
 minDivisor = 4;
