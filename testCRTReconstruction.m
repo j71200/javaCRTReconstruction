@@ -19,7 +19,7 @@ inputImage_uint = uint64(imread('images/airplane_gray.png'));
 [height, width] = size(inputImage_uint);
 
 
-minDivisor = 4;
+minDivisor = 112;
 maxDivisor = 212;
 elapsedTime = zeros((maxDivisor-minDivisor)/4+1, 2);
 for divisor = minDivisor:4:maxDivisor
