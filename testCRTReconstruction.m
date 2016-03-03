@@ -15,7 +15,7 @@ load('mat/primeList_255_bigd.mat');
 % width  = dim;
 % inputImage_uint = uint64(randi([0,255], height, width));
 
-inputImage_uint = uint64(imread('images/airplane_gray'));
+inputImage_uint = uint64(imread('images/airplane_gray.png'));
 
 
 
@@ -25,7 +25,7 @@ elapsedTime = zeros((maxDivisor-minDivisor)/4+1, 2);
 for divisor = minDivisor:4:maxDivisor
 	divisor
 
-	modulus_bigd = primeList_bigd(9:9+divisor-1);
+	modulus_bigd = primeList_255_bigd(9:9+divisor-1);
 
 
 	tic
