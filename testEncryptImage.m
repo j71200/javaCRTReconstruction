@@ -1,6 +1,8 @@
 clear
 clc
 
+% set(0,'RecursionLimit',1000)
+
 load('mat/reconImages.mat');
 
 divisor = 84;
@@ -23,7 +25,8 @@ for idx = 1:groupNums-1
 end
 
 r_bigd = java.math.BigDecimal('3');
-parfor idx = 1:groupNums
+% parfor idx = 1:groupNums
+for idx = 1:groupNums
 	m_bigd = reconImage_bigd(idx);
 	encryptedImage_bigd(idx) = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_bigd);
 end
