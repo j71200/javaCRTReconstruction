@@ -26,14 +26,16 @@ for idx = 1:groupNums-1
 end
 
 r_bigd = java.math.BigDecimal('3');
-% parfor idx = 1:groupNums
+totalElapsedTime = 0;
 for idx = 1:groupNums
+% parfor idx = 1:groupNums
 	tic
 	m_bigd = reconImage_bigd(idx);
 	encryptedImage_bigd(idx) = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_bigd);
 	elapsedTime = toc;
+	totalElapsedTime = totalElapsedTime + elapsedTime;
 
-	dispthese_debug('idx =', idx, '; elapsedTime =', elapsedTime);
+	dispthese_debug('idx =', idx, '; time =', elapsedTime, '; total =', totalElapsedTime);
 end
 
 
