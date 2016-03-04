@@ -2,21 +2,23 @@ clear
 clc
 
 
-load('mat/primeList_255_bigd.mat');
+load('mat/primeList_502_bigd.mat');
+
+% divisor = 83; % 227 digits
+divisor = 84; % 230 digits
+% divisor = 85; % 233 digits
 
 
-% divisor = 30; % 78 digits
-% divisor = 37; % 97 digits
-divisor = 64; % 172 digits
+primeNums_bigd = primeList_502_bigd(1:divisor);
 
-primeNums_bigd = primeList_255_bigd(9:9+divisor-1);
-
-product = java.math.BigDecimal('1');
+primeNums = zeros(size(primeNums_bigd));
+product_bigd = java.math.BigDecimal('1');
 for idx = 1:divisor
-	product = product.multiply(primeNums_bigd(idx));
+	product_bigd = product_bigd.multiply(primeNums_bigd(idx));
+	primeNums(idx) = str2num(primeNums_bigd(idx).toString);
 end
 
+product_bigd
 
-9525377181109295904645393262424994899338009536091637470417829940053671705940877649228816808029878641702875484184279729624439516883760029948233676127015199945376692064011583
 
-% 1230186684530117755130494958384962720772853569595334792197322452151726400507263657518745202199786469389956474942774063845925192557326303453731548268507917026122142913461670429214311602221240479274737794080665351419597459856902143413
+

@@ -8,7 +8,7 @@ clc
 % m4 = java.math.BigDecimal('271');
 % modulus_bigd = [m1, m2, m3, m4];
 
-load('mat/primeList_255_bigd.mat');
+load('mat/primeList_502_bigd.mat');
 
 % dim = 512
 % height = dim;
@@ -25,7 +25,7 @@ elapsedTime = zeros((maxDivisor-minDivisor)/4+1, 2);
 for divisor = minDivisor:4:maxDivisor
 	divisor
 
-	modulus_bigd = primeList_255_bigd(9:9+divisor-1);
+	modulus_bigd = primeList_502_bigd(1:divisor);
 
 
 	tic
