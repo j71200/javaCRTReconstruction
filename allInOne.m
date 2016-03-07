@@ -112,9 +112,9 @@ reconWatermark_bigd = reconWmSignature2_idct_trick_bigd;
 groupNums = length(reconWatermark_bigd);
 
 ZERO_BIGD = java.math.BigDecimal('0');
-encryptedImage_bigd = ZERO_BIGD;
+encryptedWatermark_bigd = ZERO_BIGD;
 for idx = 1:groupNums-1
-	encryptedImage_bigd = [encryptedImage_bigd ZERO_BIGD];
+	encryptedWatermark_bigd = [encryptedWatermark_bigd ZERO_BIGD];
 end
 
 r_bigd = java.math.BigDecimal('3');
@@ -125,7 +125,7 @@ for idx = 1:groupNums
 % parfor idx = 1:groupNums
 	tic
 	m_bigd = reconWatermark_bigd(idx);
-	encryptedImage_bigd(idx) = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_bigd);
+	encryptedWatermark_bigd(idx) = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_bigd);
 	elapsedTime = toc;
 	totalElapsedTime = totalElapsedTime + elapsedTime;
 

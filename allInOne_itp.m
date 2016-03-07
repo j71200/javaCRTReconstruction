@@ -1,7 +1,7 @@
 clear
 clc
 
-load('mat/interrupted_head.mat');
+load('mat/allInOne_4_enc_watermark.mat');
 
 
 disp('===================');
