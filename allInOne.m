@@ -149,7 +149,7 @@ end
 
 parfor idx = 1:groupNums
 % for idx = 1:groupNums
-	tempProduct_bigd = encryptedAirplane_bigd(idx).multiply(encryptedWatermark_bigd(idx));
+	tempProduct_bigd = encryptedImage_bigd(idx).multiply(encryptedWatermark_bigd(idx));
 	embededEncryptedImage_bigd(idx) = tempProduct_bigd.remainder(nSquare_bigd);
 end
 save('mat/allInOne_5_emb_watermark.mat');
