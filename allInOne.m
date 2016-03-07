@@ -38,7 +38,7 @@ disp('Reconstructing Watermark');
 disp('========================');
 disp(['Start at ' dispTime(0)]);
 
-load('mat/_data_wm256_pt256x256.mat');
+load('mat/data_wm256_pt256x256.mat');
 
 normHeight = 512;
 normWidth = 512;
