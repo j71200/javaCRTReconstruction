@@ -3,7 +3,7 @@ clc
 
 wholeProcessStart_str = dispTime(0);
 
-parpool
+% parpool
 
 load('mat/primeList_502_bigd.mat');
 
