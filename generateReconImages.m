@@ -4,7 +4,7 @@ clc
 
 load('mat/primeList_502_bigd.mat');
 divisor = 84;
-modulus_bigd = primeList_502_bigd(1:1+divisor-1);
+modulus_bigd = primeList_502_bigd(1:divisor);
 
 disp('airplane_gray');
 inputImage_uint = uint64(imread('images/airplane_gray.png'));

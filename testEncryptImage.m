@@ -4,7 +4,8 @@ clc
 
 % set(0,'RecursionLimit',1000)
 
-load('mat/reconImages.mat');
+% load('mat/reconImages.mat');
+load('mat/reconWatermark_d84.mat');
 
 divisor = 84;
 
@@ -16,7 +17,7 @@ q_bigd = java.math.BigDecimal('3674604366679959042824463379962795263227915816434
 [n_bigd, g_bigd, lambda_bigd, mu_bigd] = javaPaillierKeygen(p_bigd, q_bigd);
 
 
-reconImage_bigd = recon_airplane_bigd;
+reconImage_bigd = reconWmSignature2_idct_trick_bigd;
 groupNums = length(reconImage_bigd);
 
 ZERO_BIGD = java.math.BigDecimal('0');
@@ -27,6 +28,8 @@ end
 
 r_bigd = java.math.BigDecimal('3');
 totalElapsedTime = 0;
+
+% idx = 1;
 for idx = 1:groupNums
 % parfor idx = 1:groupNums
 	tic
