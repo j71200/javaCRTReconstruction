@@ -1,7 +1,7 @@
 clear
 clc
 
-imageName_str = 'baboon_gray';
+imageName_str = 'fruits_gray';
 dispthese_debug('FileName: ', imageName_str);
 
 wholeProcessStart_str = dispTime(0);
