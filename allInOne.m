@@ -27,9 +27,11 @@ disp('====================');
 disp('Reconstructing Image');
 disp('====================');
 disp(['Start at ' dispTime(0)]);
+time_rec_image = tic;
 
 reconImage_bigd = javaCRTReconstruct(inputImage_uint, modulus_bigd);
 
+time_rec_image = toc(time_rec_image);
 save(['mat/allInOne_' imageName_str '_1_rec_image.mat']);
 disp(['End at ' dispTime(0)]);
 
@@ -38,6 +40,7 @@ disp('========================');
 disp('Reconstructing Watermark');
 disp('========================');
 disp(['Start at ' dispTime(0)]);
+time_rec_watermark = tic;
 
 load('mat/data_wm256_pt256x256.mat');
 
@@ -66,6 +69,7 @@ wmSignature2_idct_trick_uint = uint64(wmSignature2_idct_trick_uint);
 
 reconWmSignature2_idct_trick_bigd = javaCRTReconstruct(wmSignature2_idct_trick_uint, modulus_bigd);
 
+time_rec_watermark = toc(time_rec_watermark);
 save(['mat/allInOne_' imageName_str '_2_rec_watermark.mat']);
 disp(['End at ' dispTime(0)]);
 
@@ -75,7 +79,7 @@ disp('=============');
 disp('Encrypt Image');
 disp('=============');
 disp(['Start at ' dispTime(0)]);
-
+time_enc_image = tic;
 % reconImage_bigd = recon_airplane_bigd;
 groupNums = length(reconImage_bigd);
 
@@ -88,7 +92,6 @@ end
 r_bigd = java.math.BigDecimal('3');
 totalElapsedTime = 0;
 
-
 for idx = 1:groupNums
 % parfor idx = 1:groupNums
 	tic
@@ -99,7 +102,9 @@ for idx = 1:groupNums
 
 	dispthese_debug('EncIM: idx =', idx, '; time =', elapsedTime, '; total =', totalElapsedTime);
 end
+averageTime_enc_image = totalElapsedTime / groupNums;
 
+time_enc_image = toc(time_enc_image);
 save(['mat/allInOne_' imageName_str '_3_enc_image.mat']);
 disp(['End at ' dispTime(0)]);
 
@@ -108,6 +113,7 @@ disp('=================');
 disp('Encrypt Watermark');
 disp('=================');
 disp(['Start at ' dispTime(0)]);
+time_enc_watermark = tic;
 
 reconWatermark_bigd = reconWmSignature2_idct_trick_bigd;
 groupNums = length(reconWatermark_bigd);
@@ -133,6 +139,8 @@ for idx = 1:groupNums
 	dispthese_debug('EncWM: idx =', idx, '; time =', elapsedTime, '; total =', totalElapsedTime);
 end
 
+averageTime_enc_watermark = totalElapsedTime / groupNums;
+time_enc_watermark = toc(time_enc_watermark);
 save(['mat/allInOne_' imageName_str '_4_enc_watermark.mat']);
 disp(['End at ' dispTime(0)]);
 
@@ -141,6 +149,7 @@ disp('===================');
 disp('Embedding Watermark');
 disp('===================');
 disp(['Start at ' dispTime(0)]);
+time_emb_watermark = tic;
 
 nSquare_bigd = n_bigd.pow(2);
 embededEncryptedImage_bigd = ZERO_BIGD;
@@ -153,6 +162,8 @@ parfor idx = 1:groupNums
 	tempProduct_bigd = encryptedImage_bigd(idx).multiply(encryptedWatermark_bigd(idx));
 	embededEncryptedImage_bigd(idx) = tempProduct_bigd.remainder(nSquare_bigd);
 end
+
+time_emb_watermark = toc(time_emb_watermark);
 save(['mat/allInOne_' imageName_str '_5_emb_watermark.mat']);
 disp(['End at ' dispTime(0)]);
 
@@ -160,6 +171,7 @@ disp('=============');
 disp('Decrypt Image');
 disp('=============');
 disp(['Start at ' dispTime(0)]);
+time_dec_image = tic;
 
 reconEmbededImage_bigd = ZERO_BIGD;
 for idx = 1:groupNums-1
@@ -176,6 +188,8 @@ for idx = 1:groupNums
 	totalElapsedTime = totalElapsedTime + elapsedTime;
 	dispthese_debug('DecIM: idx =', idx, '; time =', elapsedTime, '; total =', totalElapsedTime);
 end
+averageTime_dec_image = totalElapsedTime / groupNums;
+time_dec_image = toc(time_dec_image);
 save(['mat/allInOne_' imageName_str '_6_dec_image.mat']);
 disp(['End at ' dispTime(0)]);
 
@@ -184,9 +198,11 @@ disp('=============');
 disp('Recover Image');
 disp('=============');
 disp(['Start at ' dispTime(0)]);
+time_recover_image = tic;
 
 embededImage_uint = javaCRTInvReconstruct(reconEmbededImage_bigd, modulus_bigd, normHeight, normWidth);
 
+time_recover_image = toc(time_recover_image);
 save(['mat/allInOne_' imageName_str '_7_recover_image.mat']);
 disp(['End at ' dispTime(0)]);
 
