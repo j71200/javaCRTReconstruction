@@ -22,7 +22,8 @@ q_bigd = java.math.BigDecimal('3674604366679959042824463379962795263227915816434
 ciphertext = cell(totalPixels, 1);
 % Encrypt pixel by pixel
 tic
-parfor idx = 1:totalPixels
+for idx = 1:totalPixels
+% parfor idx = 1:totalPixels
 	r_dbl = round(rand(1) * 10^10);
 	r_dbl = java.math.BigDecimal(num2str(r_dbl));
 
