@@ -22,8 +22,8 @@ q_bigd = java.math.BigDecimal('3674604366679959042824463379962795263227915816434
 ciphertext = cell(totalPixels, 1);
 % Encrypt pixel by pixel
 tic
-for idx = 1:totalPixels
-% parfor idx = 1:totalPixels
+% for idx = 1:totalPixels
+parfor idx = 1:totalPixels
 	r_dbl = round(rand(1) * 10^10);
 	r_dbl = java.math.BigDecimal(num2str(r_dbl));
 
@@ -36,13 +36,14 @@ toc
 
 % General time
 % 256 pixel needs 218 s
-% Elapsed time is 218.446858 seconds.
 
 % Parallel time
 % 256 pixel needs 108 s
-% Elapsed time is 108.042388 seconds.
 
 
+% General time on Server
+% 256 pixel needs 334 s
 
-
+% Parallel time on Server
+% 256 pixel needs 39 s
 
