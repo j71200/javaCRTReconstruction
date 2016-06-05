@@ -29,7 +29,7 @@ q_bigd = java.math.BigDecimal('4727721461074353025362230719730482246329146953020
 tic
 [n_bigd, g_bigd, lambda_bigd, mu_bigd] = javaPaillierKeygen(p_bigd, q_bigd);
 
-m_bigd = java.math.BigDecimal('7481244')
+m_bigd = java.math.BigDecimal('0')
 r_bigd = java.math.BigDecimal('3');
 c_bigd = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_bigd)
 recM_bigd = javaPaillierDecrypt(c_bigd, n_bigd, lambda_bigd, mu_bigd)

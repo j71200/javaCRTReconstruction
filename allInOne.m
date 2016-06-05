@@ -74,13 +74,11 @@ save(['mat/allInOne_' imageName_str '_2_rec_watermark.mat']);
 disp(['End at ' dispTime(0)]);
 
 
-
 disp('=============');
 disp('Encrypt Image');
 disp('=============');
 disp(['Start at ' dispTime(0)]);
 time_enc_image = tic;
-% reconImage_bigd = recon_airplane_bigd;
 groupNums = length(reconImage_bigd);
 
 ZERO_BIGD = java.math.BigDecimal('0');

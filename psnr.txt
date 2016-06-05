@@ -1,0 +1,42 @@
+原本 affine transform的方法
+pattern: 256x256
+
+airplane_gray
+psnr = 37.1176
+
+baboon_gray
+psnr = 37.1094
+
+fruits_gray
+psnr = 37.1734
+
+lena_gray
+psnr = 37.1125
+
+peppers_gray
+psnr = 37.1739
+
+==============================
+patternSize = 128 * 128;
+lena_gray
+psnr = 43.0648
+
+==============================
+patternSize = 64 * 64;
+lena_gray
+psnr = 48.8210
+
+==============================
+patternSize = 32 * 32;
+lena_gray
+psnr = 54.0681
+
+airplane_gray
+psnr = 54.2197
+
+
+
+
+
+
+
