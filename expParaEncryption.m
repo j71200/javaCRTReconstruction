@@ -77,11 +77,13 @@ toc
 
 % Parallel time
 % 128x128 pixel needs  s
+% 128x128 pixel needs  +  =  s
 
 % General time on Server
 % 128x128 pixel needs  s
 
 % Parallel time on Server
+% 128x128 pixel needs  s
 % 128x128 pixel needs 3.36 + 40.79 = 44.15 s
 
 % =========== 512x512 ===========
