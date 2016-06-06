@@ -27,14 +27,14 @@ vPlaintext = reshape(smallInputImage, totalPixels, 1);
 % ========================
 % Reconstruction
 % ========================
-load('mat/primeList_502_bigd.mat');
+% load('mat/primeList_502_bigd.mat');
 
-reconFactor = 208;
-vModului = primeList_502(1:reconFactor);
-tic
-cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului);
-toc
-
+% reconFactor = 208;
+% vModului = primeList_502(1:reconFactor);
+% tic
+% cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului);
+% toc
+cReconData_bigd = vPlaintext;
 
 % ========================
 % Encryption
