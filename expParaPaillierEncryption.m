@@ -4,7 +4,7 @@ numPlaintexts = length(vPlaintext);
 cCiphertext = cell(numPlaintexts, 1);
 
 
-if isa(vPlaintext, 'double')
+if isa(vPlaintext, 'double') || isa(vPlaintext, 'uint8')
 	parfor idx = 1:numPlaintexts
 		r_bigd = round(rand(1) * 10^10);
 		r_bigd = java.math.BigDecimal(num2str(r_bigd));
