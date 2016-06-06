@@ -19,19 +19,23 @@ q_bigd = java.math.BigDecimal('3674604366679959042824463379962795263227915816434
 [n_bigd, g_bigd, lambda_bigd, mu_bigd] = javaPaillierKeygen(p_bigd, q_bigd);
 
 
-ciphertext = cell(totalPixels, 1);
-% Encrypt pixel by pixel
+% ciphertext = cell(totalPixels, 1);
+% % Encrypt pixel by pixel
+% tic
+% % for idx = 1:totalPixels
+% parfor idx = 1:totalPixels
+% 	r_dbl = round(rand(1) * 10^10);
+% 	r_dbl = java.math.BigDecimal(num2str(r_dbl));
+
+% 	m_bigd = dbl2bigd(smallInputImage(idx));
+% 	c_bigd = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_dbl);
+
+% 	ciphertext{idx} = c_bigd;
+% end
+% toc
+
 tic
-% for idx = 1:totalPixels
-parfor idx = 1:totalPixels
-	r_dbl = round(rand(1) * 10^10);
-	r_dbl = java.math.BigDecimal(num2str(r_dbl));
-
-	m_bigd = dbl2bigd(smallInputImage(idx));
-	c_bigd = javaPaillierEncrypt(m_bigd, n_bigd, g_bigd, r_dbl);
-
-	ciphertext{idx} = c_bigd;
-end
+cCiphertext = paraPaillierEncryption(vPlaintext, n_bigd, g_bigd);
 toc
 
 % General time
@@ -45,5 +49,5 @@ toc
 % 256 pixel needs 334 s
 
 % Parallel time on Server
-% 256 pixel needs 39 s
+% 256 pixel needs 37 s
 
