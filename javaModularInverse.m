@@ -1,4 +1,4 @@
-function [inverse_bigd, counter_uint] = javaModularInverse(target_bigd, modulus_bigd);
+function [inverse_bigd, counter_uint] = javaModularInverse(target_bigd, modulus_bigd)
 
 % This method is based on the extended Euclidean algorithm.
 % So it is faster than Euler's theorem in finding the
