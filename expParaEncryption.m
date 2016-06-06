@@ -5,8 +5,8 @@ clc
 % expParaEncryption
 
 inputImage = imread('images/lena_gray.png');
-smallInputImage = imresize(inputImage, 0.03125);
-% smallInputImage is 16 x 16
+% smallInputImage = imresize(inputImage, 0.03125); % smallInputImage is 16 x 16
+smallInputImage = imresize(inputImage, 1/4); % smallInputImage is 16 x 16
 
 % figure
 % imshow(smallInputImage)
@@ -63,10 +63,10 @@ toc
 % 256 pixel needs 0.92 + 3.56 = 4.48 s
 
 % General time on Server
-% 256 pixel needs 334 s
+% 256 pixel needs  s
 
 % Parallel time on Server
-% 256 pixel needs 37 s
+% 256 pixel needs 0.74 + 4.69 = 5.43 s
 
 
 
