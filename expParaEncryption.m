@@ -37,7 +37,7 @@ q_bigd = java.math.BigDecimal('3674604366679959042824463379962795263227915816434
 
 tic
 vPlaintext = reshape(smallInputImage, totalPixels, 1);
-cCiphertext = paraPaillierEncryption(vPlaintext, n_bigd, g_bigd);
+cCiphertext = expParaPaillierEncryption(vPlaintext, n_bigd, g_bigd);
 toc
 
 % General time

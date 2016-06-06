@@ -1,4 +1,4 @@
-function cCiphertext = paraPaillierEncryption(vPlaintext, n_bigd, g_bigd)
+function cCiphertext = expParaPaillierEncryption(vPlaintext, n_bigd, g_bigd)
 
 numPlaintexts = length(vPlaintext);
 cCiphertext = cell(numPlaintexts, 1);
