@@ -6,8 +6,8 @@ clc
 
 inputImage = imread('images/lena_gray.png');
 % smallInputImage = imresize(inputImage, 0.03125); % smallInputImage is 16 x 16
-% smallInputImage = imresize(inputImage, 1/4); % smallInputImage is 128 x 128
-smallInputImage = inputImage;
+smallInputImage = imresize(inputImage, 1/4); % smallInputImage is 128 x 128
+% smallInputImage = inputImage;
 
 % figure
 % imshow(smallInputImage)
@@ -56,20 +56,22 @@ toc
 % Parallel time on Server
 % 16x16 pixel needs 37 s
 
-% =========== With the reconstruction ===========
+% =========== 16x16 ===========
 % General time
 % 16x16 pixel needs  s
 
 % Parallel time
+% 16x16 pixel needs 108 s
 % 16x16 pixel needs 0.92 + 3.56 = 4.48 s
 
 % General time on Server
 % 16x16 pixel needs  s
 
 % Parallel time on Server
+% 16x16 pixel needs 37 s
 % 16x16 pixel needs 0.74 + 4.69 = 5.43 s
 
-% =========== With the reconstruction ===========
+% =========== 128x128 ===========
 % General time
 % 128x128 pixel needs  s
 
@@ -82,18 +84,18 @@ toc
 % Parallel time on Server
 % 128x128 pixel needs 3.36 + 40.79 = 44.15 s
 
-% =========== With the reconstruction ===========
+% =========== 512x512 ===========
 % General time
-% 128x128 pixel needs  s
+% 512x512 pixel needs  s
 
 % Parallel time
-% 128x128 pixel needs  s
+% 512x512 pixel needs  s
 
 % General time on Server
-% 128x128 pixel needs  s
+% 512x512 pixel needs  s
 
 % Parallel time on Server
-% 128x128 pixel needs  =  s
+% 512x512 pixel needs 38.64 + 610.92 = 649.56 s
 
 
 
