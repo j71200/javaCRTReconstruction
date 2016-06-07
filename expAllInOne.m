@@ -22,6 +22,12 @@ for idx = 1:repeatTimes
 	[elapsedKeyGen(idx), elapsedReconstruct(idx), elapsedEncryption(idx), elapsedDecryption(idx), elapsedInvRecon(idx)] = expParaEncryption(scaleRatio);
 end
 
+averageKeyGen = mean(elapsedKeyGen);
+averageReconstruct = mean(elapsedReconstruct);
+averageEncryption = mean(elapsedEncryption);
+averageDecryption = mean(elapsedDecryption);
+averageInvRecon = mean(elapsedInvRecon);
+
 
 
 
