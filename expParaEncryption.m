@@ -25,7 +25,7 @@ p_bigd = java.math.BigDecimal('3347807169895689878604416984821269081770479498371
 q_bigd = java.math.BigDecimal('36746043666799590428244633799627952632279158164343087642676032283815739666511279233373417143396810270092798736308917');
 
 [n_bigd, g_bigd, lambda_bigd, mu_bigd] = javaPaillierKeygen(p_bigd, q_bigd);
-elapsedKeyGen = toc(ticKeyGen)
+elapsedKeyGen = toc(ticKeyGen);
 
 vPlaintext = reshape(smallInputImage, totalPixels, 1);
 
@@ -40,21 +40,21 @@ vModului_bigd = primeList_502_bigd(1:reconFactor);
 
 ticReconstruct = tic;
 cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului_bigd);
-elapsedReconstruct = toc(ticReconstruct)
+elapsedReconstruct = toc(ticReconstruct);
 
 % ========================
 % Encryption
 % ========================
 ticEncryption = tic;
 cCiphertext_bigd = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
-elapsedEncryption = toc(ticEncryption)
+elapsedEncryption = toc(ticEncryption);
 
 % ========================
 % Decryption
 % ========================
 ticDecryption = tic;
 cDecryptedMessage_bigd = expParaPaillierDecryption(cCiphertext_bigd, n_bigd, lambda_bigd, mu_bigd);
-elapsedDecryption = toc(ticDecryption)
+elapsedDecryption = toc(ticDecryption);
 
 % ========================
 % Inverse-reconstruction
@@ -62,7 +62,7 @@ elapsedDecryption = toc(ticDecryption)
 cDecryptedMessage_bigd = cReconData_bigd;
 ticInvRecon = tic;
 vRecoveredMessage = expParaCRTInvReconstruct(cDecryptedMessage_bigd, vModului_bigd, totalPixels);
-elapsedInvRecon = toc(ticInvRecon)
+elapsedInvRecon = toc(ticInvRecon);
 
 
 % ========================

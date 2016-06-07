@@ -28,6 +28,12 @@ averageEncryption = mean(elapsedEncryption);
 averageDecryption = mean(elapsedDecryption);
 averageInvRecon = mean(elapsedInvRecon);
 
+elapsedKeyGen
+elapsedReconstruct
+elapsedEncryption
+elapsedDecryption
+elapsedInvRecon
+
 
 
 
