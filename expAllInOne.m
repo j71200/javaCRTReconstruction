@@ -8,7 +8,7 @@ clc
 % 256
 % 512
 
-scaleRatio = 32/512;
+scaleRatio = 64/512;
 repeatTimes = 10;
 
 elapsedKeyGen = zeros(repeatTimes, 1);
