@@ -5,14 +5,14 @@ clc
 % expParaEncryption
 
 inputImage = imread('images/lena_gray.png');
-% smallInputImage = imresize(inputImage, 0.03125); % smallInputImage is 16 x 16
-smallInputImage = imresize(inputImage, 1/4); % smallInputImage is 128 x 128
+smallInputImage = imresize(inputImage, 0.03125); % smallInputImage is 16 x 16
+% smallInputImage = imresize(inputImage, 1/4); % smallInputImage is 128 x 128
 % smallInputImage = inputImage;
 
-% figure
-% imshow(smallInputImage)
-[height_dbl width_dbl] = size(smallInputImage);
-totalPixels = height_dbl * width_dbl;
+figure
+imshow(smallInputImage)
+[height, width] = size(smallInputImage);
+totalPixels = height * width;
 
 % RSA-768 (232 digits)
 p_bigd = java.math.BigDecimal('33478071698956898786044169848212690817704794983713768568912431388982883793878002287614711652531743087737814467999489');
@@ -20,28 +20,48 @@ q_bigd = java.math.BigDecimal('3674604366679959042824463379962795263227915816434
 
 [n_bigd, g_bigd, lambda_bigd, mu_bigd] = javaPaillierKeygen(p_bigd, q_bigd);
 
-
 vPlaintext = reshape(smallInputImage, totalPixels, 1);
 
 
 % ========================
 % Reconstruction
 % ========================
-% load('mat/primeList_502_bigd.mat');
+load('mat/primeList_502_bigd.mat');
 
-% reconFactor = 208;
-% vModului = primeList_502(1:reconFactor);
-% tic
-% cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului);
-% toc
-cReconData_bigd = vPlaintext;
+reconFactor = 208;
+vModului_bigd = primeList_502_bigd(1:reconFactor);
+tic
+cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului_bigd);
+toc
 
 % ========================
 % Encryption
 % ========================
 tic
-cCiphertext = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
+cCiphertext_bigd = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
 toc
+
+% ========================
+% Decryption
+% ========================
+tic
+cDecryptedMessage_bigd = expParaPaillierDecryption(cCiphertext_bigd, n_bigd, lambda_bigd, mu_bigd);
+toc
+
+% ========================
+% Inverse-reconstruction
+% ========================
+cDecryptedMessage_bigd = cReconData_bigd;
+tic
+vRecoveredMessage = expParaCRTInvReconstruct(cDecryptedMessage_bigd, vModului_bigd, totalPixels);
+toc
+
+recoveredImage = uint8(vRecoveredMessage);
+recoveredImage = reshape(recoveredImage, height, width);
+figure
+imshow(recoveredImage)
+
+
 
 % =========== Without the reconstruction ===========
 % General time
@@ -77,7 +97,7 @@ toc
 
 % Parallel time
 % 128x128 pixel needs  s
-% 128x128 pixel needs  +  =  s
+% 128x128 pixel needs 9.51 + 163.79 = 173.30 s
 
 % General time on Server
 % 128x128 pixel needs  s
@@ -91,15 +111,12 @@ toc
 % 512x512 pixel needs  s
 
 % Parallel time
-% 512x512 pixel needs  s
+% 512x512 pixel needs 133.84 + __ s
 
 % General time on Server
 % 512x512 pixel needs  s
 
 % Parallel time on Server
+% 512x512 pixel needs  s
 % 512x512 pixel needs 38.64 + 610.92 = 649.56 s
-
-
-
-
 

@@ -1,11 +1,11 @@
-function cReconData_bigd = expParaCRTReconstruct(vData, vModului)
+function cReconData_bigd = expParaCRTReconstruct(vData, vModului_bigd)
 
 
 % vData    = [98, 99, 105, 201, 82, 223, 67];
-% vModului = [257, 263, 269];
+% vModului_bigd = [257, 263, 269];
 % x = 8843211, 14390916, 9409351
 
-reconFactor = length(vModului);
+reconFactor = length(vModului_bigd);
 numRNS = ceil(length(vData) / reconFactor);
 
 % ==============
@@ -27,12 +27,12 @@ ONE_BIGD  = java.math.BigDecimal('1');
 % ======================================
 
 M_bigd = ONE_BIGD;
-cModului_bigd = cell(length(vModului), 1);
+% cModului_bigd = cell(length(vModului_bigd), 1);
 for idx = 1:reconFactor
-	modulus_i_bigd = dbl2bigd(vModului(idx));
-	M_bigd = M_bigd.multiply(modulus_i_bigd);
+	% modulus_i_bigd = dbl2bigd(vModului_bigd(idx));
+	M_bigd = M_bigd.multiply(vModului_bigd(idx));
 
-	cModului_bigd{idx} = modulus_i_bigd;
+	% cModului_bigd{idx} = modulus_i_bigd;
 end
 
 
@@ -41,7 +41,7 @@ end
 % ========================
 cAuxiMultiplier_bigd = cell(reconFactor, 1);
 parfor idx = 1:reconFactor
-	modulus_i_bigd = cModului_bigd{idx};
+	modulus_i_bigd = vModului_bigd(idx);
 
 	mDividMi_bigd = M_bigd.divide(modulus_i_bigd);
 	[invMDividMi_bigd, ~] = javaModularInverse(mDividMi_bigd, modulus_i_bigd);
