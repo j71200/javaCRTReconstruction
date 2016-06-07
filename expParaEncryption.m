@@ -1,24 +1,31 @@
-close all
-clear
-clc
+function [elapsedKeyGen, elapsedReconstruct, elapsedEncryption, elapsedDecryption, elapsedInvRecon] = expParaEncryption(scaleRatio)
+% close all
+% clear
+% clc
 
-% expParaEncryption
 
 inputImage = imread('images/lena_gray.png');
-smallInputImage = imresize(inputImage, 0.03125); % smallInputImage is 16 x 16
+smallInputImage = imresize(inputImage, scaleRatio);
+
+% smallInputImage = imresize(inputImage, 0.03125); % smallInputImage is 16 x 16
 % smallInputImage = imresize(inputImage, 1/4); % smallInputImage is 128 x 128
 % smallInputImage = inputImage;
 
-figure
-imshow(smallInputImage)
+% figure
+% imshow(smallInputImage)
 [height, width] = size(smallInputImage);
 totalPixels = height * width;
 
+% ========================
+% KeyGen
+% ========================
 % RSA-768 (232 digits)
+ticKeyGen = tic;
 p_bigd = java.math.BigDecimal('33478071698956898786044169848212690817704794983713768568912431388982883793878002287614711652531743087737814467999489');
 q_bigd = java.math.BigDecimal('36746043666799590428244633799627952632279158164343087642676032283815739666511279233373417143396810270092798736308917');
 
 [n_bigd, g_bigd, lambda_bigd, mu_bigd] = javaPaillierKeygen(p_bigd, q_bigd);
+elapsedKeyGen = toc(ticKeyGen)
 
 vPlaintext = reshape(smallInputImage, totalPixels, 1);
 
@@ -30,37 +37,44 @@ load('mat/primeList_502_bigd.mat');
 
 reconFactor = 208;
 vModului_bigd = primeList_502_bigd(1:reconFactor);
-tic
+
+ticReconstruct = tic;
 cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului_bigd);
-toc
+elapsedReconstruct = toc(ticReconstruct)
 
 % ========================
 % Encryption
 % ========================
-tic
+ticEncryption = tic;
 cCiphertext_bigd = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
-toc
+elapsedEncryption = toc(ticEncryption)
 
 % ========================
 % Decryption
 % ========================
-tic
+ticDecryption = tic;
 cDecryptedMessage_bigd = expParaPaillierDecryption(cCiphertext_bigd, n_bigd, lambda_bigd, mu_bigd);
-toc
+elapsedDecryption = toc(ticDecryption)
 
 % ========================
 % Inverse-reconstruction
 % ========================
 cDecryptedMessage_bigd = cReconData_bigd;
-tic
+ticInvRecon = tic;
 vRecoveredMessage = expParaCRTInvReconstruct(cDecryptedMessage_bigd, vModului_bigd, totalPixels);
-toc
+elapsedInvRecon = toc(ticInvRecon)
 
+
+% ========================
+% Examining
+% ========================
 recoveredImage = uint8(vRecoveredMessage);
 recoveredImage = reshape(recoveredImage, height, width);
-figure
-imshow(recoveredImage)
-
+% figure
+% imshow(recoveredImage)
+if nnz(double(recoveredImage) - double(smallInputImage)) ~= 0
+	warning('recoveredImage is not equals to smallInputImage on scaleRatio %f.', scaleRatio);
+end
 
 
 % =========== Without the reconstruction ===========
@@ -120,3 +134,4 @@ imshow(recoveredImage)
 % 512x512 pixel needs  s
 % 512x512 pixel needs 38.64 + 610.92 = 649.56 s
 
+end
