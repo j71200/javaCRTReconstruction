@@ -42,16 +42,18 @@ vPlaintext = reshape(smallInputImage, totalPixels, 1);
 % cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului_bigd);
 % elapsedReconstruct = toc(ticReconstruct);
 
-cReconData_bigd = cell(totalPixels, 1);
-parfor idx = 1:totalPixels
-	cReconData_bigd{idx} = dbl2bigd(vPlaintext(idx));
-end
+
+
+% cReconData_bigd = cell(totalPixels, 1);
+% parfor idx = 1:totalPixels
+% 	cReconData_bigd{idx} = dbl2bigd(vPlaintext(idx));
+% end
 
 % ========================
 % Encryption
 % ========================
 ticEncryption = tic;
-cCiphertext_bigd = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
+cCiphertext_bigd = expParaPaillierEncryption(vPlaintext, n_bigd, g_bigd);
 elapsedEncryption = toc(ticEncryption);
 
 % ========================
