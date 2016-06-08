@@ -75,6 +75,17 @@ elapsedDecryption = toc(ticDecryption);
 % ========================
 % Examining
 % ========================
+if length(cDecryptedMessage_bigd) ~= totalPixels
+	warning('Decrypted message has different size.');
+else
+	decryptedImage = zeros(height, width, 'uint8');
+	parfor idx = 1:totalPixels
+		decryptedImage(idx) = uint8(bigd2dbl(cDecryptedMessage_bigd{idx}));
+	end
+end
+
+psnr(decryptedImage, smallInputImage)
+
 % recoveredImage = uint8(vRecoveredMessage);
 % recoveredImage = reshape(recoveredImage, height, width);
 % % figure

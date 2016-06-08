@@ -4,8 +4,8 @@ numPlaintexts = length(vPlaintext);
 cCiphertext = cell(numPlaintexts, 1);
 
 if isa(vPlaintext, 'double') || isa(vPlaintext, 'uint8')
-	minPlaintext = min(vPlaintext)
-	maxPlaintext = max(vPlaintext)
+	minPlaintext = min(vPlaintext);
+	maxPlaintext = max(vPlaintext);
 	vPlainValues = minPlaintext:maxPlaintext;
 	cCipherValues_bigd = cell(length(vPlainValues), 1);
 
