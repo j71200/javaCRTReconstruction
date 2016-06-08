@@ -2,6 +2,8 @@ close all
 clear
 clc
 
+% 這個程式是在測試CRT在decryption上的speed up能力
+
 % 	一般	CRT	平行(加CRT)
 % 1	0.992949	0.116595	0.653177
 % 2	0.999928	0.131975	0.695054
