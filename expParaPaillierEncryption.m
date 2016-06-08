@@ -38,7 +38,8 @@ elseif isa(vPlaintext, 'cell')
 
 		cCiphertext{idx} = c_bigd;
 	end
-
+else
+	warning('vPlaintext is a unknow type.');
 end
 
 
