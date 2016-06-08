@@ -23,7 +23,7 @@ for idx = 1:repeatTimes
 	a = clock;
 	disp(['Start at ' num2str(a(2)) '/' num2str(a(3)) ' ' num2str(a(4)) ':' num2str(a(5))]);
 	% [elapsedKeyGen(idx), elapsedReconstruct(idx), elapsedEncryption(idx), elapsedDecryption(idx), elapsedInvRecon(idx)] = expParaEncryption(scaleRatio);
-	[elapsedKeyGen(idx), elapsedEncryption(idx), elapsedDecryption(idx)] = expParaEncryptionNoRecon(scaleRatio);
+	[elapsedKeyGen(idx), elapsedEncryption(idx), elapsedDecryption(idx), aa, bb] = expParaEncryptionNoRecon(scaleRatio);
 end
 
 averageKeyGen = mean(elapsedKeyGen);

@@ -20,6 +20,9 @@ if isa(vPlaintext, 'double') || isa(vPlaintext, 'uint8')
 		r_bigd = java.math.BigDecimal(num2str(r_bigd));
 		
 		c_bigd = cCipherValues_bigd{vPlaintext(idx) - minPlaintext + 1};
+
+		r_bigd = javaFastPowerMod(r_bigd, n_bigd, nSquare_bigd);
+		
 		c_bigd = c_bigd.multiply(r_bigd);
 		c_bigd = c_bigd.remainder(nSquare_bigd);
 		cCiphertext{idx} = c_bigd;

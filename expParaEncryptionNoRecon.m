@@ -1,4 +1,4 @@
-function [elapsedKeyGen, elapsedEncryption, elapsedDecryption] = expParaEncryptionNoRecon(scaleRatio)
+function [elapsedKeyGen, elapsedEncryption, elapsedDecryption, smallInputImage, decryptedImage] = expParaEncryptionNoRecon(scaleRatio)
 % close all
 % clear
 % clc
@@ -84,7 +84,9 @@ else
 	end
 end
 
-psnr(decryptedImage, smallInputImage)
+figure
+imshow(decryptedImage)
+% psnr(decryptedImage, smallInputImage)
 
 % recoveredImage = uint8(vRecoveredMessage);
 % recoveredImage = reshape(recoveredImage, height, width);
