@@ -35,19 +35,45 @@ vPlaintext = reshape(smallInputImage, totalPixels, 1);
 % ========================
 load('mat/primeList_502_bigd.mat');
 
-reconFactor = 208;
+reconFactor = 84;
 vModului_bigd = primeList_502_bigd(1:reconFactor);
 
 ticReconstruct = tic;
 cReconData_bigd = expParaCRTReconstruct(vPlaintext, vModului_bigd);
 elapsedReconstruct = toc(ticReconstruct);
 
+
 % ========================
 % Encryption
 % ========================
+% product_bigd = dbl2bigd(1);
+% for idx = 1:length(vModului_bigd)
+% 	product_bigd = product_bigd.multiply(vModului_bigd(idx));
+% end
+% product_bigd.compareTo(n_bigd)
+
+% To be deleted
+for idx = 1:length(cReconData_bigd)
+	if cReconData_bigd{idx}.compareTo(n_bigd) == 1
+		% over
+		warning('over');
+		% disp(cReconData_bigd{idx});
+		idx
+	elseif cReconData_bigd{idx}.compareTo(n_bigd) == 0
+		% equals
+		warning('equals');
+		idx
+		% disp(cReconData_bigd{idx});
+	else
+		% ok
+
+	end
+end
+
 ticEncryption = tic;
 cCiphertext_bigd = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
 elapsedEncryption = toc(ticEncryption);
+
 
 % ========================
 % Decryption
@@ -59,7 +85,6 @@ elapsedDecryption = toc(ticDecryption);
 % ========================
 % Inverse-reconstruction
 % ========================
-cDecryptedMessage_bigd = cReconData_bigd;
 ticInvRecon = tic;
 vRecoveredMessage = expParaCRTInvReconstruct(cDecryptedMessage_bigd, vModului_bigd, totalPixels);
 elapsedInvRecon = toc(ticInvRecon);
@@ -72,9 +97,10 @@ recoveredImage = uint8(vRecoveredMessage);
 recoveredImage = reshape(recoveredImage, height, width);
 % figure
 % imshow(recoveredImage)
-if nnz(double(recoveredImage) - double(smallInputImage)) ~= 0
-	warning('recoveredImage is not equals to smallInputImage on scaleRatio %f.', scaleRatio);
-end
+psnr(recoveredImage, smallInputImage)
+% if nnz(double(recoveredImage) - double(smallInputImage)) ~= 0
+% 	warning('recoveredImage is not equals to smallInputImage on scaleRatio %f.', scaleRatio);
+% end
 
 
 % =========== Without the reconstruction ===========

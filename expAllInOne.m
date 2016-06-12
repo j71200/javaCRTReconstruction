@@ -1,3 +1,4 @@
+close all
 clear
 clc
 
@@ -8,8 +9,8 @@ clc
 % 256
 % 512
 
-scaleRatio = 256/512;
-repeatTimes = 10;
+scaleRatio = 128/512;
+repeatTimes = 1;
 
 elapsedKeyGen = zeros(repeatTimes, 1);
 % elapsedReconstruct = zeros(repeatTimes, 1);
@@ -22,8 +23,8 @@ for idx = 1:repeatTimes
 	disp(['repeat: ' num2str(idx)]);
 	a = clock;
 	disp(['Start at ' num2str(a(2)) '/' num2str(a(3)) ' ' num2str(a(4)) ':' num2str(a(5))]);
-	% [elapsedKeyGen(idx), elapsedReconstruct(idx), elapsedEncryption(idx), elapsedDecryption(idx), elapsedInvRecon(idx)] = expParaEncryption(scaleRatio);
-	[elapsedKeyGen(idx), elapsedEncryption(idx), elapsedDecryption(idx)] = expParaEncryptionNoRecon(scaleRatio);
+	[elapsedKeyGen(idx), elapsedReconstruct(idx), elapsedEncryption(idx), elapsedDecryption(idx), elapsedInvRecon(idx)] = expParaEncryption(scaleRatio);
+	% [elapsedKeyGen(idx), elapsedEncryption(idx), elapsedDecryption(idx)] = expParaEncryptionNoRecon(scaleRatio);
 end
 
 averageKeyGen = mean(elapsedKeyGen);
