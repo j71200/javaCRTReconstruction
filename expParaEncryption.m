@@ -46,30 +46,6 @@ elapsedReconstruct = toc(ticReconstruct);
 % ========================
 % Encryption
 % ========================
-% product_bigd = dbl2bigd(1);
-% for idx = 1:length(vModului_bigd)
-% 	product_bigd = product_bigd.multiply(vModului_bigd(idx));
-% end
-% product_bigd.compareTo(n_bigd)
-
-% To be deleted
-for idx = 1:length(cReconData_bigd)
-	if cReconData_bigd{idx}.compareTo(n_bigd) == 1
-		% over
-		warning('over');
-		% disp(cReconData_bigd{idx});
-		idx
-	elseif cReconData_bigd{idx}.compareTo(n_bigd) == 0
-		% equals
-		warning('equals');
-		idx
-		% disp(cReconData_bigd{idx});
-	else
-		% ok
-
-	end
-end
-
 ticEncryption = tic;
 cCiphertext_bigd = expParaPaillierEncryption(cReconData_bigd, n_bigd, g_bigd);
 elapsedEncryption = toc(ticEncryption);
