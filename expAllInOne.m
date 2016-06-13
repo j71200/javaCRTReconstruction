@@ -25,7 +25,6 @@ for repeatIdx = 1:repeatTimes
 	disp(['Start at ' num2str(a(2)) '/' num2str(a(3)) ' ' num2str(a(4)) ':' num2str(a(5))]);
 
 
-
 	inputImage = imread('images/lena_gray.png');
 	smallInputImage = imresize(inputImage, scaleRatio);
 	[height, width] = size(smallInputImage);
@@ -55,7 +54,8 @@ for repeatIdx = 1:repeatTimes
 
 	wmSize = 50; % 8KB
 	watermark = randi([0, 1], wmSize, 1);
-	patternSize = 256 * 256; % 必須大於大於 wmSize才行
+	% patternSize = 256 * 256; % 必須大於大於 wmSize才行
+	patternSize = 64 * 64; % 必須大於大於 wmSize才行
 	patterns = sign(randn(patternSize, wmSize));
 
 	wmSignature1 = patterns * (2*watermark - 1);
@@ -136,10 +136,16 @@ for repeatIdx = 1:repeatTimes
 
 
 	% ========================
-	% Examining
+	% Inverse-shifting
 	% ========================
 	recoveredImage = uint8(vRecoveredMessage);
 	recoveredImage = reshape(recoveredImage, height, width);
+	recoveredImage = recoveredImage + round(trickShift);
+
+	% ========================
+	% Examining
+	% ========================
+	
 	% figure
 	% imshow(recoveredImage)
 	psnr(recoveredImage, smallInputImage)
@@ -155,6 +161,9 @@ for repeatIdx = 1:repeatTimes
 	% [elapsedKeyGen(repeatIdx), elapsedReconstruct(repeatIdx), elapsedEncryption(repeatIdx), elapsedDecryption(repeatIdx), elapsedInvRecon(repeatIdx)] = expParaEncryption(scaleRatio);
 	% [elapsedKeyGen(repeatIdx), elapsedEncryption(repeatIdx), elapsedDecryption(repeatIdx)] = expParaEncryptionNoRecon(scaleRatio);
 end
+
+endClock = clock;
+disp(['End at ' num2str(endClock(2)) '/' num2str(endClock(3)) ' ' num2str(endClock(4)) ':' num2str(endClock(5))]);
 
 save('mat/expImportant.mat');
 
