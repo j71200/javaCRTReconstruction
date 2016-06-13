@@ -116,7 +116,7 @@ for repeatIdx = 1:repeatTimes
 	% ========================
 	cEncEmbImage_bigd = cell(length(cCiphertext_bigd), 1);
 	parfor idx = 1:length(cCiphertext_bigd)
-		cEncEmbImage_bigd{idx} = cCiphertext_bigd{idx} * cEncryptedWatermark_bigd{idx};
+		cEncEmbImage_bigd{idx} = cCiphertext_bigd{idx}.multiply(cEncryptedWatermark_bigd{idx});
 		cEncEmbImage_bigd{idx} = cEncEmbImage_bigd{idx}.remainder(n_bigd.pow(2));
 	end
 
